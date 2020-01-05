@@ -1,0 +1,5 @@
+{
+  "numberofsongs_permood" : "4",
+  "camera_source" : "0",
+  "emotions" : ["neutral", "anger", "happy", "fear", "sadness", "surprise", "unknown"]
+}

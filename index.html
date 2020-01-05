@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  color: black;
+  padding: 1px;
+  background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 1px;
+  text-align: center;
+  background: white;
+}
+
+.header h1 {
+  font-size: 30px;
+  color: black;
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 12px 14px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 60%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 40%;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+.custbutton {
+  padding: 5px 40px;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 9px #999;
+}
+
+.custbutton:hover {background-color: #3e8e41}
+
+.custbutton:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Music Therapy</h1>
+</div>
+
+<div class="topnav">
+  <a href="http://127.0.0.1:5000/displayApplicationSettings">Settings</a>
+  <a href="http://127.0.0.1:5000/displaySongConfiguration">Songs</a>
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <h2>Live Camera</h2>
+      <img src="{{ url_for('video_feed') }}">
+      <br>
+      <br>
+      <form action="/snapshot" method="get" id="snapshot_form">
+         <input type="hidden" name="action" value="snapshot">
+      </form>
+      <button class="custbutton" form="snapshot_form">Take Photo</button>
+      <br>
+      <br>
+      <form action="/check_mood" method="get" id="checkmood_form">
+         <input type="hidden" name="action" value="check_mood">
+      </form>
+      <button class="custbutton" form="checkmood_form">Check Mood</button>
+    </div>
+  </div>
+
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>Picture Taken</h2>
+      <img src="{{ user_image }}" alt="User Image" width="400" height="330"></img>
+    </div>
+  </div>
+
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>Song Recommendation</h2>
+      <p>{{ user_data[1] }}</p>
+      <a href={{ user_data[2] }} target="_blank">{{ user_data[2] }}</a>
+      <br>
+    </div>
+  </div>
+
+   <div class="leftcolumn">
+    <div class="card">
+      <h2>Mood</h2>
+      <p>{{ user_data[0] }}</p>
+
+    </div>
+  </div>
+
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>Feedback</h2>
+          <p>{{ user_data[3] }}</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
